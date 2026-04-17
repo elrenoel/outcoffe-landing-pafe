@@ -1,0 +1,157 @@
+import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import americano from "../../assets/americano.jpg";
+import coffeeLatte from "../../assets/coffee-latte.jpg";
+import matchaLatte from "../../assets/iced-matcha-latte.jpg";
+
+const menuData = [
+  { id: 1, name: "Iced Americano", image: americano },
+  { id: 2, name: "Coffee Caramel Latte", image: coffeeLatte },
+  { id: 3, name: "Matcha Latte", image: matchaLatte },
+  { id: 4, name: "Iced Americano", image: americano },
+  { id: 5, name: "Coffee Caramel Latte", image: coffeeLatte },
+  { id: 6, name: "Matcha Latte", image: matchaLatte },
+];
+
+const Menu = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [dotsCount, setDotsCount] = useState(menuData.length);
+  const carouselRef = useRef(null);
+
+  const calculateActiveIndex = () => {
+    if (!carouselRef.current) return;
+    const parentContainer = carouselRef.current;
+    if (parentContainer.children.length === 0) return;
+
+    const parentRect = parentContainer.getBoundingClientRect();
+    const childWidth =
+      parentContainer.children[0].getBoundingClientRect().width;
+
+    // Menghitung berapa item yang terlihat utuh di layar
+    const visibleCount = Math.max(1, Math.round(parentRect.width / childWidth));
+    const expectedDots = Math.max(1, menuData.length - visibleCount + 1);
+
+    setDotsCount(expectedDots);
+
+    let closestIndex = 0;
+    let minDistance = Infinity;
+
+    Array.from(parentContainer.children).forEach((child, index) => {
+      const childRect = child.getBoundingClientRect();
+      const distance = Math.abs(childRect.left - parentRect.left);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    const safeIndex = Math.min(closestIndex, expectedDots - 1);
+
+    setActiveIndex((current) => {
+      return current !== safeIndex ? safeIndex : current;
+    });
+  };
+
+  const handleScroll = () => {
+    calculateActiveIndex();
+  };
+
+  useEffect(() => {
+    calculateActiveIndex();
+    window.addEventListener("resize", calculateActiveIndex);
+    return () => window.removeEventListener("resize", calculateActiveIndex);
+  }, []);
+
+  const scrollTo = (index) => {
+    if (!carouselRef.current) return;
+    const parentContainer = carouselRef.current;
+    const child = parentContainer.children[index];
+
+    if (child) {
+      // Calculate child's offset relative to container scroll space minus typical padding
+      parentContainer.scrollTo({
+        left: child.offsetLeft - 16,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  return (
+    <section className="w-full px-4 pb-20 pt-10 md:py-20 bg-primary">
+      <div className="w-full flex flex-col" id="menu">
+        {/* Header Section */}
+        <div className="flex flex-row justify-between items-end mb-10">
+          <h2 className="text-[2.5rem] md:text-5xl font-bold font-heading tracking-tighter text-text-dark leading-none">
+            Menu Pilihan
+          </h2>
+          <button className="hidden md:block px-6 py-3 rounded-[8px] bg-text-dark text-white text-sm font-medium hover:bg-text-dark/90 transition-colors shrink-0">
+            Lihat Semua Menu
+          </button>
+        </div>
+
+        {/* Menu Grid / Carousel */}
+        <motion.div
+          ref={carouselRef}
+          onScroll={handleScroll}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-8 hide-scrollbar pb-6"
+        >
+          {menuData.map((item, index) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              className="w-full md:w-[calc(33.333%-1.33rem)] md:min-w-[calc(33.333%-1.33rem)] shrink-0 snap-center md:snap-start flex flex-col group cursor-pointer"
+            >
+              <div className="w-full aspect-[4/5] overflow-hidden rounded-[16px] md:rounded-[20px] mb-4 bg-[#e8e8df]">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              <h3 className="text-xl font-heading font-medium text-text-dark text-center mt-2 tracking-tight">
+                {item.name}
+              </h3>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Slider Navigation Dots */}
+        <div className="flex justify-center items- gap-3 mt-2 md:mt-4 w-[300px] mx-auto">
+          {Array.from({ length: dotsCount }).map((_, index) => {
+            const isActive = activeIndex === index;
+            return (
+              <button
+                key={index}
+                onClick={() => scrollTo(index)}
+                className={`h-2.5 md:h-3 rounded-full transition-all duration-500 ease-out focus:outline-none ${
+                  isActive
+                    ? "flex-1 md:w-24 bg-[#3D2C23]"
+                    : "w-2.5 md:w-3 bg-[#3D2C23]/30 hover:bg-[#3D2C23]/60"
+                }`}
+                aria-label={`Go to menu slide ${index + 1}`}
+              />
+            );
+          })}
+        </div>
+
+        {/* Mobile View All Button */}
+        <div className="mt-10 md:hidden flex justify-center">
+          <button className="px-8 py-3.5 rounded-[8px] bg-text-dark text-white text-md font-medium hover:bg-black/90 transition-colors w-full">
+            Lihat Semua Menu
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Menu;

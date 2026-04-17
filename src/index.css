@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #F5F5DC;
+  --color-text-dark: #1A1A1A;
+  --color-accent: #FFFFFF;
+  --font-heading: 'DM Sans', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem; /* Adjust for fixed navbar */
+  }
+
+  body {
+    @apply bg-primary text-text-dark font-body antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading tracking-[-0.03em];
+  }
+
+  p {
+    @apply tracking-[-0.01em];
+  }
+}
+
+/* Base custom styles based on PRD requirements */
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 rounded-full bg-text-dark text-primary font-medium transition-transform duration-300 hover:scale-105;
+  }
+
+  .btn-outline {
+    @apply px-6 py-3 border-2 border-text-dark rounded-full text-text-dark font-medium transition-transform duration-300 hover:scale-105;
+  }
+
+  .card {
+    @apply rounded-2xl bg-white overflow-hidden shadow-sm;
+  }
+}
+
+@layer utilities {
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.dm-sans {
+  font-family: 'DM Sans', sans-serif;
+}
+
+.montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
