@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link, useLocation } from "react-router-dom";
+import { NavHashLink } from "react-router-hash-link";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
   const [activeLink, setActiveLink] = useState("Beranda");
 
   // Handle scroll to add blur effect
@@ -16,12 +19,25 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Update active link based on location
+  useEffect(() => {
+    if (location.pathname === "/menu") {
+      setActiveLink("Menu");
+    } else if (location.pathname === "/booking") {
+      setActiveLink("Booking");
+    } else if (location.pathname === "/") {
+      if (location.hash === "#maps") setActiveLink("Temukan Kami");
+      else if (location.hash === "#contact") setActiveLink("Kontak Kami");
+      else setActiveLink("Beranda");
+    }
+  }, [location]);
+
   const navLinks = [
-    { name: "Beranda", href: "#" },
-    { name: "Menu", href: "#menu" },
-    { name: "Temukan Kami", href: "#maps" },
-    { name: "Kontak Kami", href: "#contact" },
-    { name: "Booking", href: "#" },
+    { name: "Beranda", to: "/#" },
+    { name: "Menu", to: "/menu" },
+    { name: "Temukan Kami", to: "/#maps" },
+    { name: "Kontak Kami", to: "/#contact" },
+    { name: "Booking", to: "/booking" },
   ];
 
   return (
@@ -35,20 +51,20 @@ const Navbar = () => {
       >
         <div className="w-full px-4 flex justify-between items-center">
           {/* Logo */}
-          <a
-            href="#"
+          <Link
+            to="/"
             className="dm-sans font-heading font-bold text-4xl md:text-5xl tracking-tighter text-text-dark"
           >
             OutCoffee
-          </a>
+          </Link>
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-1 bg-white/50 p-1.5 rounded-full backdrop-blur-sm border border-black/5 shadow-sm">
             {navLinks.map((link, index) => (
-              <a
+              <NavHashLink
+                smooth
                 key={index}
-                href={link.href}
-                onClick={() => setActiveLink(link.name)}
+                to={link.to}
                 className={`relative px-6 py-2.5 rounded-full text-sm font-medium transition-colors z-10 ${
                   activeLink === link.name
                     ? "text-white" // Active state
@@ -63,7 +79,7 @@ const Navbar = () => {
                   />
                 )}
                 <span className="relative z-20">{link.name}</span>
-              </a>
+              </NavHashLink>
             ))}
           </div>
 
@@ -108,14 +124,15 @@ const Navbar = () => {
 
               <div className="flex flex-col space-y-4">
                 {navLinks.map((link, index) => (
-                  <a
+                  <NavHashLink
+                    smooth
                     key={index}
-                    href={link.href}
+                    to={link.to}
                     className="text-lg font-medium text-text-dark py-2 border-b border-black/10"
                     onClick={() => setIsOpen(false)}
                   >
                     {link.name}
-                  </a>
+                  </NavHashLink>
                 ))}
               </div>
 

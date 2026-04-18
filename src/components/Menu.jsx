@@ -1,17 +1,9 @@
 import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
-import americano from "../../assets/americano.jpg";
-import coffeeLatte from "../../assets/coffee-latte.jpg";
-import matchaLatte from "../../assets/iced-matcha-latte.jpg";
+import { Link } from "react-router-dom";
+import { menuItems } from "../data/menuData";
 
-const menuData = [
-  { id: 1, name: "Iced Americano", image: americano },
-  { id: 2, name: "Coffee Caramel Latte", image: coffeeLatte },
-  { id: 3, name: "Matcha Latte", image: matchaLatte },
-  { id: 4, name: "Iced Americano", image: americano },
-  { id: 5, name: "Coffee Caramel Latte", image: coffeeLatte },
-  { id: 6, name: "Matcha Latte", image: matchaLatte },
-];
+const menuData = menuItems.slice(0, 6);
 
 const Menu = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -85,9 +77,12 @@ const Menu = () => {
           <h2 className="text-[2.5rem] md:text-5xl font-bold font-heading tracking-tighter text-text-dark leading-none">
             Menu Pilihan
           </h2>
-          <button className="hidden md:block px-6 py-3 rounded-[8px] bg-text-dark text-white text-sm font-medium hover:bg-text-dark/90 transition-colors shrink-0">
+          <Link 
+            to="/menu"
+            className="hidden md:block px-6 py-3 rounded-[8px] bg-text-dark text-white text-sm font-medium hover:bg-text-dark/90 transition-colors shrink-0 text-center"
+          >
             Lihat Semua Menu
-          </button>
+          </Link>
         </div>
 
         {/* Menu Grid / Carousel */}
@@ -145,9 +140,12 @@ const Menu = () => {
 
         {/* Mobile View All Button */}
         <div className="mt-10 md:hidden flex justify-center">
-          <button className="px-8 py-3.5 rounded-[8px] bg-text-dark text-white text-md font-medium hover:bg-black/90 transition-colors w-full">
+          <Link 
+            to="/menu"
+            className="px-8 py-3.5 rounded-[8px] bg-text-dark text-white text-md font-medium hover:bg-black/90 transition-colors w-full text-center"
+          >
             Lihat Semua Menu
-          </button>
+          </Link>
         </div>
       </div>
     </section>
