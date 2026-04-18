@@ -11,7 +11,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 6rem; /* Adjust for fixed navbar */
+    scroll-padding-top: 6rem;
+    /* Adjust for fixed navbar */
   }
 
   body {
@@ -43,7 +44,7 @@
   }
 
   .card {
-    @apply rounded-2xl bg-white overflow-hidden shadow-sm;
+    @apply rounded-[8px] bg-white overflow-hidden shadow-sm;
   }
 }
 

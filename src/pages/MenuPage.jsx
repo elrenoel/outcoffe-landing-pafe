@@ -92,7 +92,7 @@ const MenuPage = () => {
                   <button
                     key={cat.id}
                     onClick={() => scrollToSection(cat.id)}
-                    className={`text-left px-4 py-3 rounded-xl transition-all duration-300 font-medium ${
+                    className={`text-left px-4 py-3 rounded-[8px] transition-all duration-300 font-medium ${
                       activeCategory === cat.id
                         ? "bg-text-dark text-white shadow-lg shadow-black/5 translate-x-1"
                         : "text-text-dark/50 hover:text-text-dark hover:bg-white"
@@ -129,9 +129,9 @@ const MenuPage = () => {
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: idx * 0.05 }}
-                          className="flex gap-4 md:gap-6 bg-white p-4 md:p-5 rounded-[24px] hover:shadow-xl hover:shadow-black/5 transition-all duration-500 group border border-transparent hover:border-text-dark/5"
+                          className="flex gap-4 md:gap-6 bg-white p-4 md:p-5 rounded-[8px] hover:shadow-xl hover:shadow-black/5 transition-all duration-500 group border border-transparent hover:border-text-dark/5"
                         >
-                          <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden bg-[#f0f0e8] shrink-0">
+                          <div className="w-24 h-24 md:w-32 md:h-32 rounded-[8px] overflow-hidden bg-[#f0f0e8] shrink-0">
                             <img 
                               src={item.image} 
                               alt={item.name} 

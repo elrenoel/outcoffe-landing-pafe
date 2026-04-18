@@ -104,7 +104,7 @@ const Menu = () => {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               className="w-full md:w-[calc(33.333%-1.33rem)] md:min-w-[calc(33.333%-1.33rem)] shrink-0 snap-center md:snap-start flex flex-col group cursor-pointer"
             >
-              <div className="w-full aspect-[4/5] overflow-hidden rounded-[16px] md:rounded-[20px] mb-4 bg-[#e8e8df]">
+              <div className="w-full aspect-[4/5] overflow-hidden rounded-[8px] mb-4 bg-[#e8e8df]">
                 <img
                   src={item.image}
                   alt={item.name}

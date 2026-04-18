@@ -38,7 +38,7 @@ const Gallery = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="w-full aspect-4/5 md:aspect-auto md:row-span-2 rounded-2xl md:rounded-3xl overflow-hidden group bg-[#e8e8df]"
+          className="w-full aspect-4/5 md:aspect-auto md:row-span-2 rounded-[8px] overflow-hidden group bg-[#e8e8df]"
         >
           <img 
             src={barista} 
@@ -54,7 +54,7 @@ const Gallery = () => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="w-full aspect-4/3 md:aspect-auto md:col-start-2 md:row-start-1 rounded-2xl md:rounded-3xl overflow-hidden group bg-[#e8e8df]"
+          className="w-full aspect-4/3 md:aspect-auto md:col-start-2 md:row-start-1 rounded-[8px] overflow-hidden group bg-[#e8e8df]"
         >
           <img 
             src={coffeeBeans} 
@@ -70,7 +70,7 @@ const Gallery = () => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="w-full aspect-4/3 md:aspect-auto md:col-start-2 md:row-start-2 rounded-2xl md:rounded-3xl overflow-hidden group bg-[#e8e8df]"
+          className="w-full aspect-4/3 md:aspect-auto md:col-start-2 md:row-start-2 rounded-[8px] overflow-hidden group bg-[#e8e8df]"
         >
           <img 
             src={cafe} 

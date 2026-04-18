@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
-import { MessageCircle } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { NavHashLink } from "react-router-hash-link";
 
 const Footer = () => {
   const whatsappUrl =
@@ -34,7 +36,7 @@ const Footer = () => {
               whileHover={{ rotate: [-2, 2, -2, 0], scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
-              <MessageCircle
+              <FaWhatsapp
                 size={24}
                 className="group-hover:-scale-x-100 transition-transform duration-500"
               />
@@ -63,36 +65,39 @@ const Footer = () => {
             {/* Pintasan */}
             <div className="flex flex-col gap-4">
               <h4 className="text-lg font-bold font-heading mb-2">Pintasan</h4>
-              <a
-                href="#"
+              <NavHashLink
+                smooth
+                to="/#"
                 className="text-white/60 hover:text-white transition-colors"
               >
                 Beranda
-              </a>
-              <a
-                href="#"
+              </NavHashLink>
+              <Link
+                to="/menu"
                 className="text-white/60 hover:text-white transition-colors"
               >
                 Menu
-              </a>
-              <a
-                href="#"
+              </Link>
+              <NavHashLink
+                smooth
+                to="/#maps"
                 className="text-white/60 hover:text-white transition-colors"
               >
                 Temukan Kami
-              </a>
-              <a
-                href="#"
+              </NavHashLink>
+              <NavHashLink
+                smooth
+                to="/#contact"
                 className="text-white/60 hover:text-white transition-colors"
               >
                 Kontak Kami
-              </a>
-              <a
-                href="#"
+              </NavHashLink>
+              <Link
+                to="/booking"
                 className="text-white/60 hover:text-white transition-colors"
               >
                 Booking
-              </a>
+              </Link>
             </div>
 
             {/* Sosial Media */}

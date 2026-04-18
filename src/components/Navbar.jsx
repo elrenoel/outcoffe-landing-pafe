@@ -19,6 +19,11 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Reset scrolled state on route change to prevent transition flicker
+  useEffect(() => {
+    setScrolled(false);
+  }, [location.pathname]);
+
   // Update active link based on location
   useEffect(() => {
     if (location.pathname === "/menu") {
@@ -43,7 +48,7 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-200 ${
+        className={`fixed top-0 left-0 right-0 w-full z-50 transition-[background-color,backdrop-filter,padding,box-shadow] duration-300 ease-in-out ${
           scrolled
             ? "bg-primary/80 backdrop-blur-md py-4 shadow-sm"
             : "bg-transparent py-4"

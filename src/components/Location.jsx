@@ -76,7 +76,7 @@ const Location = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="w-full h-100 md:h-125 rounded-2xl md:rounded-3xlerflow-hidden mt-2 bg-[#e8e8df]"
+          className="w-full h-100 md:h-125 rounded-[8px] overflow-hidden mt-2 bg-[#e8e8df]"
         >
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3982.0705015192757!2d98.65656007773357!3d3.5712569871280815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zM8KwMzQnMTYuNSJOIDk4wrAzOSc0MS4yIkU!5e0!3m2!1sid!2sid!4v1776439476760!5m2!1sid!2sid"

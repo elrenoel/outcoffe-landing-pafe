@@ -1,11 +1,14 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import heroBg from "../../assets/hero-section.png";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative w-full min-h-[95vh] md:min-h-screen pt-21 px-4 pb-12 flex items-center justify-center">
       {/* Background with rounded corners container matching the design */}
-      <div className="absolute inset-x-4 top-21 bottom-4 md:bottom-8 rounded-lg overflow-hidden">
+      <div className="absolute inset-x-4 top-21 bottom-4 md:bottom-8 rounded-[8px] overflow-hidden">
         {/* Background Image */}
         <div
           className="absolute inset-0 w-full h-full bg-cover bg-center"
@@ -43,10 +46,16 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col w-full px-8 md:px-0 space-y-3">
-            <button className="w-full py-2.5 rounded-lg bg-primary text-text-dark font-medium hover:bg-white transition-colors duration-300">
+            <button
+              className="w-full py-2.5 rounded-lg bg-primary text-text-dark font-medium hover:bg-white transition-colors duration-300"
+              onClick={() => navigate("/menu")}
+            >
               Lihat Menu
             </button>
-            <button className="w-full py-2.5 rounded-lg border border-white/40 text-white font-medium hover:bg-white/10 backdrop-blur-sm transition-colors duration-300">
+            <button
+              className="w-full py-2.5 rounded-lg border border-white/40 text-white font-medium hover:bg-white/10 backdrop-blur-sm transition-colors duration-300"
+              onClick={() => navigate("/#maps")}
+            >
               Kunjungi Kami
             </button>
           </div>
